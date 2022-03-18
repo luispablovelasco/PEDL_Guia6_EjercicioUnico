@@ -21,6 +21,8 @@ namespace PEDL_Guia6_EjercicioUnico
         public int nivel;
         public Rectangle nodo; //Para dibujar el nodo del arbol
 
+        int n = 0, a = 1;
+
         private const int Radio = 30; //Varaible que define el tamaño de los circulos qu4e representa los nodos del arbo
         private const int DistanciaH = 80; //Variable para el manejo de distancia horizontal
         private const int DistanciaV = 10; //Variable para el manejo de distancia vertical
@@ -391,6 +393,7 @@ namespace PEDL_Guia6_EjercicioUnico
                 listPostOrden.Add(nodo.info);
             }
         }
+
     }
 }
 

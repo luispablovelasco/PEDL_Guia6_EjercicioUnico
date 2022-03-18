@@ -16,6 +16,11 @@ namespace PEDL_Guia6_EjercicioUnico
         public Form1()
         {
             InitializeComponent();
+            lblaltura.Text = "";
+            lblnivel.Text = "";
+            lblsuma.Text = "";
+            lbltotalnodos.Text = "";
+
         }
 
         //Declaraciond e valraible a utilizar
@@ -167,8 +172,11 @@ namespace PEDL_Guia6_EjercicioUnico
 
             //Suma de la información de los nodos
             int suma = valoresNodos.Sum();
+            int alturaTotal = mi_Arbol.calcularAltura();
             lblsuma.Text = "" + suma;
-            lbltotalnodos.Text = "" + cont;
+            lbltotalnodos.Text = "" + cont; //Numero de nodos
+            lblaltura.Text = "" + alturaTotal; //Alatura del arbol
+
         }
     }
 }

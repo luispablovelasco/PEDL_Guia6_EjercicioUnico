@@ -14,8 +14,8 @@ namespace PEDL_Guia6_EjercicioUnico
 
         public Nodo_Arbol Raiz;
         public Nodo_Arbol aux;
-        public int level = 0, a = 0, b = 0;
-
+        public int a = 0, altut, left = 0, right = 0; //Variable para saber la altura del arbol
+        int level = 0;
         private int altura = 0;
 
         public int Altura
@@ -144,56 +144,37 @@ namespace PEDL_Guia6_EjercicioUnico
             }
         }
 
-        
-
-        public string preOrden(Nodo_Arbol llave)
+        public int calcularAltura()
         {
-            if (llave != null)
+            if (Raiz != null)
             {
-                preorden = preorden + llave.info + ", ";
-                preOrden(llave.Izquierdo);
-                preOrden(llave.Derecho);
+                cal_Altura(Raiz);
             }
-            return preorden;
-        } //Procedimiento auxiliar
-
-        public string inOrden(Nodo_Arbol llave)
-        {
-            if (llave != null)
-            {
-                inOrden(llave.Izquierdo);
-                enorden += llave.info + ",";
-                inOrden(llave.Derecho); 
-            }
-            return enorden;
-        } //Procedimiento auxiliar
-
-        public string posOrden(Nodo_Arbol llave)
-        {
-            if (llave != null)
-            {
-                posOrden(llave.Izquierdo);
-                posOrden(llave.Derecho);
-                posorden += llave.info;
-            }
-            return posorden;
-        } //Procedimiento auxiliar
-
-        public void calcularAltura(Nodo_Arbol Nodo)
-        {
-            if (Nodo != null)
-            {
-                a++;
-                if(a == b)
-                {
-                    b++;
-                    altura = b - 1;
-                }
-                calcularAltura(Nodo.Izquierdo);
-                calcularAltura(Nodo.Derecho);
-                a--;
-            }
+            return altut + 1;
         }
 
+
+        public int cal_Altura(Nodo_Arbol Nodo)
+        {
+            if (Nodo == null)
+            {
+                altut = 0;
+            }
+            else
+            {
+                left = cal_Altura(Nodo.Izquierdo);
+                right = cal_Altura(Nodo.Derecho);
+
+                if (left > right)
+                {
+                    altut = left + 1;
+                }
+                else
+                {
+                    altut = right + 1;
+                }
+            }
+            return altut;
+        }
     }
 }
