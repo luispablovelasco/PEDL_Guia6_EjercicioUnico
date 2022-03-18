@@ -24,6 +24,11 @@ namespace PEDL_Guia6_EjercicioUnico
         Arbol_Binario mi_Arbol = new Arbol_Binario(null); //Creacion del objeto arbol
         Graphics g; //Definicion del objeto grafico
 
+        Nodo_Arbol nodoArbolAux = new Nodo_Arbol(); //Nodo para los recorridos
+
+        //Lista para hacer la suma de los valores de los nodos
+        public List<int> valoresNodos = new List<int>();
+
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.Clear(this.BackColor);
@@ -47,6 +52,7 @@ namespace PEDL_Guia6_EjercicioUnico
                 else
                 {
                     mi_Arbol.Insertar(Dato);
+                    valoresNodos.Add(Dato); //Añadimos el dato tambien en la lista para sumarlo despues
                     txtDato.Clear();
                     txtDato.Focus();
                     cont++;
@@ -54,6 +60,7 @@ namespace PEDL_Guia6_EjercicioUnico
                     Refresh();
                 }
             }
+
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -72,6 +79,7 @@ namespace PEDL_Guia6_EjercicioUnico
                 else
                 {
                     mi_Arbol.Eliminar(Dato);
+                    valoresNodos.Remove(Dato); //Eliminamos el mismo elemento pero de la lista de suma
                     txtEliminar.Clear();
                     txtEliminar.Focus();
                     cont--;
@@ -103,6 +111,64 @@ namespace PEDL_Guia6_EjercicioUnico
                     Refresh();
                 }
             }
+        }
+
+        private void cboxRecorridos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            if (cboxRecorridos.SelectedItem.Equals("En - Orden"))
+            {
+                //InOrden o EnOrden
+                listBox1.Items.Clear();
+                nodoArbolAux.listInOrden.Clear();
+
+                nodoArbolAux.inOrden(mi_Arbol.Raiz);
+                foreach (var valores in nodoArbolAux.listInOrden)
+                {
+                    listBox1.Items.Add(valores);
+                }
+
+
+            }
+
+            if (cboxRecorridos.SelectedItem.Equals("Pre - Orden"))
+            {
+                //PreOrden
+                listBox1.Items.Clear();
+                nodoArbolAux.listPreOrden.Clear();
+
+                nodoArbolAux.preOrden(mi_Arbol.Raiz);
+                foreach (var valores in nodoArbolAux.listPreOrden)
+                {
+                    listBox1.Items.Add(valores);
+                }
+
+            }
+
+            if (cboxRecorridos.SelectedItem.Equals("Post - Orden"))
+            {
+                //PostOrden
+                listBox1.Items.Clear();
+                nodoArbolAux.listPostOrden.Clear();
+
+                nodoArbolAux.postOrden(mi_Arbol.Raiz);
+                foreach (var valores in nodoArbolAux.listPostOrden)
+                {
+                    listBox1.Items.Add(valores);
+                }
+
+            }
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //Actualizamos los datos de la investigación
+
+            //Suma de la información de los nodos
+            int suma = valoresNodos.Sum();
+            lblsuma.Text = "" + suma;
+            lbltotalnodos.Text = "" + cont;
         }
     }
 }

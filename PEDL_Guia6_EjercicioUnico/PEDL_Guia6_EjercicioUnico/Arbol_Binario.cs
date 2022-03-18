@@ -14,6 +14,21 @@ namespace PEDL_Guia6_EjercicioUnico
 
         public Nodo_Arbol Raiz;
         public Nodo_Arbol aux;
+        public int level = 0, a = 0, b = 0;
+
+        private int altura = 0;
+
+        public int Altura
+        {
+            get { return altura = 0; }
+            set { altura = value; }
+        }
+
+
+
+        //Variable para los recorridos
+        string preorden, enorden, posorden;
+
 
         public Arbol_Binario()
         {
@@ -36,6 +51,7 @@ namespace PEDL_Guia6_EjercicioUnico
             else
             {
                 Raiz = Raiz.Insertar(x, Raiz, Raiz.nivel);
+                level++;
             }
 
         }
@@ -49,6 +65,7 @@ namespace PEDL_Guia6_EjercicioUnico
             else
             {
                 Raiz.Eliminar(x, ref Raiz);
+                level--;
             }
         }
 
@@ -126,5 +143,57 @@ namespace PEDL_Guia6_EjercicioUnico
                 }
             }
         }
+
+        
+
+        public string preOrden(Nodo_Arbol llave)
+        {
+            if (llave != null)
+            {
+                preorden = preorden + llave.info + ", ";
+                preOrden(llave.Izquierdo);
+                preOrden(llave.Derecho);
+            }
+            return preorden;
+        } //Procedimiento auxiliar
+
+        public string inOrden(Nodo_Arbol llave)
+        {
+            if (llave != null)
+            {
+                inOrden(llave.Izquierdo);
+                enorden += llave.info + ",";
+                inOrden(llave.Derecho); 
+            }
+            return enorden;
+        } //Procedimiento auxiliar
+
+        public string posOrden(Nodo_Arbol llave)
+        {
+            if (llave != null)
+            {
+                posOrden(llave.Izquierdo);
+                posOrden(llave.Derecho);
+                posorden += llave.info;
+            }
+            return posorden;
+        } //Procedimiento auxiliar
+
+        public void calcularAltura(Nodo_Arbol Nodo)
+        {
+            if (Nodo != null)
+            {
+                a++;
+                if(a == b)
+                {
+                    b++;
+                    altura = b - 1;
+                }
+                calcularAltura(Nodo.Izquierdo);
+                calcularAltura(Nodo.Derecho);
+                a--;
+            }
+        }
+
     }
 }

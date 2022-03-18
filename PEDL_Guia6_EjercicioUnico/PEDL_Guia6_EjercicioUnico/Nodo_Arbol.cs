@@ -347,6 +347,50 @@ namespace PEDL_Guia6_EjercicioUnico
         {
             Rectangle rec = new Rectangle(t.CoordenadaX, t.CoordenadaY, 40, 40);
         }
+
+
+        //Listas en donde se guardaran los recorridos de los nodos
+
+        public List<int> listPreOrden = new List<int>();
+        public List<int> listInOrden = new List<int>();
+        public List<int> listPostOrden = new List<int>();
+
+        //Recorrido pre orden (R,I,D)
+        public void preOrden(Nodo_Arbol nodo)
+        {
+
+            if (nodo != null)
+            {
+                listPreOrden.Add(nodo.info);
+                preOrden(nodo.Izquierdo);
+                preOrden(nodo.Derecho);
+            }
+
+        }
+
+        //Recorrido en orden (I,R,D)
+        public void inOrden(Nodo_Arbol nodo)
+        {
+
+            if (nodo != null)
+            {
+                inOrden(nodo.Izquierdo);
+                listInOrden.Add(nodo.info);
+                inOrden(nodo.Derecho);
+            }
+        }
+
+        //Recorrido Post Orden (I,D,R)
+        public void postOrden(Nodo_Arbol nodo)
+        {
+
+            if (nodo != null)
+            {
+                postOrden(nodo.Izquierdo);
+                postOrden(nodo.Derecho);
+                listPostOrden.Add(nodo.info);
+            }
+        }
     }
 }
 
